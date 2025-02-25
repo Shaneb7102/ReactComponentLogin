@@ -7,7 +7,16 @@ function App() {
 
   return (
     <>
+      <div>
+    <h2>Think-Thank Research Centre</h2>
+    <form>
       
+      <button type="submit">Login</button>
+      <button type="submit">Register</button>
+
+    </form>
+  </div>
+
     </>
   );
 }
