@@ -1,15 +1,20 @@
-// import { useState } from "react";
-// import reactLogo from "./assets/react.svg";
-// import "./App.css";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./HomePage";
+import LoginPage from "./LoginPage";
+import RegisterPage from "./RegisterPage";
 
-// function App() {
-//   const [count, setCount] = useState(0);
+const App: React.FC = () => {
+  return (
+    
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+      </Routes>
+    
+  );
+};
 
-//   return (
-//     <>
-//       <p>Hello World</p>
-//     </>
-//   );
-// }
+export default App;
 
-// export default App;

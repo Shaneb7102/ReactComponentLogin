@@ -1,9 +1,9 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0);
+const HomePage: React.FC = () => {
+  const navigate = useNavigate();
 
   return (
     <>
@@ -11,14 +11,14 @@ function App() {
     <h2>Think-Thank Research Centre</h2>
     <form>
       
-      <button type="submit">Login</button>
-      <button type="submit">Register</button>
+      <button type ="button" onClick={() => navigate("/login")} >Login</button>
+      <button type ="button" onClick={() => navigate("/register")}>Register</button>
 
     </form>
   </div>
 
     </>
   );
-}
+};
 
-export default App;
+export default HomePage;
