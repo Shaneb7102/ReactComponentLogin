@@ -1,5 +1,8 @@
 import "./App.css";
+import { useNavigate } from "react-router-dom";
 const LoginPage: React.FC = () => {
+  const navigate = useNavigate();
+
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
         <div className="bg-white p-6 rounded-lg shadow-md w-96">
@@ -32,6 +35,7 @@ const LoginPage: React.FC = () => {
             <button
               type="submit"
               className="w-full px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600"
+              onClick={() => navigate("/end")}
             >
               Login
             </button>
