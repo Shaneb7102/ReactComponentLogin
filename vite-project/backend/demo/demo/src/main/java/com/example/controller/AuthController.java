@@ -6,7 +6,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity <?> login(@RequestBody User user){
-        if("admin".equals(user.getEmail()) && "password".equals(user.getPassword()) && "admin".equals(user.getRole())){
+        if("admin@example.com".equals(user.getEmail()) && "password".equals(user.getPassword())){
             String token = Jwts.builder()
                 .setSubject(user.getUsername())
                 .setIssuedAt(new Date())
