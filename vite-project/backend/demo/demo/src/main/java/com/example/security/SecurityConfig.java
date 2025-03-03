@@ -29,6 +29,7 @@ public class SecurityConfig {
             // Configure authorization
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers("/ping").permitAll() // Allow access to ping endpoint
                 .anyRequest().authenticated()
             )
             // Configure session management
