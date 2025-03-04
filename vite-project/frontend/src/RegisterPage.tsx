@@ -36,7 +36,7 @@ const RegisterPage: React.FC = () => {
       if (data.token) {
         localStorage.setItem("token", data.token);
       }
-      navigate("/end");
+      navigate("/login");
     } else {
       setMessage("Registration failed. Email may already exist.");
     }
