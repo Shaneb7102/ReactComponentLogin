@@ -108,6 +108,17 @@ export const fetchProtectedData = async (): Promise<any> => {
   }
 };
 
+// Add this to api.ts
+export const logoutUser = (): void => {
+  // Clear all auth-related data from localStorage
+  localStorage.removeItem('token');
+  localStorage.removeItem('email');
+  localStorage.removeItem('role');
+  
+  // Redirect to the login page
+  window.location.href = '/login';
+};
+
 // Get current user from localStorage
 export const getCurrentUser = (): User | null => {
   const token = localStorage.getItem('token');

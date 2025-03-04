@@ -1,6 +1,6 @@
 import "./App.css";
 import { Link } from "react-router-dom";
-import { getCurrentUser } from "./services/api";
+import { getCurrentUser, logoutUser } from "./services/api";
 
 const EndPage: React.FC = () => {
   const user = getCurrentUser();
@@ -17,6 +17,12 @@ const EndPage: React.FC = () => {
           Admin Panel
         </Link>
       )}
+      <button
+          onClick={logoutUser}
+          className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+        >
+          Logout
+        </button>
     </div>
   );
 };

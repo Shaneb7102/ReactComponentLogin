@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { fetchAllUsers, updateUserRole } from "./services/api";
+import { fetchAllUsers, logoutUser, updateUserRole } from "./services/api";
 
 const AdminPage: React.FC = () => {
   const [users, setUsers] = useState<any[]>([]);
@@ -81,9 +81,15 @@ const AdminPage: React.FC = () => {
       <div className="max-w-4xl mx-auto">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-semibold">User Management</h1>
-          <Link to="/dashboard" className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+          <Link to="/end" className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
             Back to Dashboard
           </Link>
+          <button 
+    onClick={logoutUser}
+    className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+  >
+    Logout
+  </button>
         </div>
 
         {/* Messages */}
