@@ -27,12 +27,13 @@ import com.example.service.AuthService;
 @CrossOrigin(origins = "http://localhost:5173") // Allows requests from react
 public class AuthController {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
     private final AuthService authService;
 
     @Autowired
-    public AuthController(AuthService authService) {
+    public AuthController(AuthService authService, UserRepository userRepository) {
         this.authService = authService;
+        this.userRepository = userRepository;
     }
 
     @PostMapping("/login")
@@ -40,17 +41,20 @@ public class AuthController {
         String token = authService.login(user.getEmail(), user.getPassword());
         
         if (token != null) {
+            User foundUser = userRepository.findByEmail(user.getEmail()).orElse(null);
             Map<String, Object> response = new HashMap<>();
             response.put("token", token);
             response.put("email", user.getEmail());
+            
+            if (foundUser != null) {
+                response.put("role", foundUser.getRole());
+            }
             
             return ResponseEntity.ok(response);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
     }
-
-    
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user) {
@@ -60,13 +64,13 @@ public class AuthController {
             Map<String, Object> response = new HashMap<>();
             response.put("message", "User registered successfully");
             response.put("email", registeredUser.getEmail());
+            response.put("role", registeredUser.getRole());
             
             return ResponseEntity.ok(response);
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email already exists");
         }
     }
-
 
     @PostMapping("/users/role")
     public ResponseEntity<?> updateUserRole(@RequestBody Map<String, String> request) {
@@ -102,9 +106,4 @@ public class AuthController {
         
         return ResponseEntity.ok(userDTOs);
     }
-
-
-
-
-
 }

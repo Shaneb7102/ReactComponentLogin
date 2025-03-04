@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -42,8 +43,19 @@ public class AuthService {
             return null;
         }
         
-        // In a real app, we would encode the password here
-        // user.setPassword(passwordEncoder.encode(user.getPassword()));
+        // Make sure it has a default role
+        if (user.getRole() == null) {
+            user.setRole("RESEARCHER"); // Default role
+        }
+        
         return userRepository.save(user);
+    }
+
+    public boolean updateUserRole(String email, String role) {
+        return userRepository.updateRole(email, role);
+    }
+    
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 }

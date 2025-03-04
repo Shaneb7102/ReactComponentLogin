@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class User {
     private String email;
     private String password;
@@ -36,9 +35,4 @@ public class User {
     public void setPassword(String password){
         this.password = password;
     }
-
-    
-
-
-    
 }

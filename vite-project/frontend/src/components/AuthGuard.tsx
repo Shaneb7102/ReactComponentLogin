@@ -1,19 +1,41 @@
-import { Navigate, useLocation } from 'react-router-dom';
-import React from 'react';
+import { Navigate, useLocation } from "react-router-dom";
+import { isAuthenticated, getCurrentUser } from "../services/api";
+import React from "react";
 
 interface AuthGuardProps {
   children: React.ReactNode;
+  requiredRole?: string;
 }
 
-const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
+const AuthGuard: React.FC<AuthGuardProps> = ({ children, requiredRole = "RESEARCHER" }) => {
   const location = useLocation();
-  const isAuthenticated = !!localStorage.getItem('token');
-
-  if (!isAuthenticated) {
-    // Redirect to login page but save the location they were trying to access
-    return <Navigate to="/login" state={{ from: location }} replace />;
+  const authenticated = isAuthenticated();
+  const user = getCurrentUser();
+  
+  // If not authenticated, redirect to login
+  if (!authenticated) {
+    return (
+      <Navigate 
+        to="/login" 
+        state={{ from: location }} 
+        replace 
+      />
+    );
   }
-
+  
+  // Check if user has the required role
+  const hasRequiredRole = user?.role === requiredRole || user?.role === "ADMIN";
+  if (!hasRequiredRole && requiredRole !== "RESEARCHER") {
+    return (
+      <Navigate 
+        to="/unauthorized" 
+        state={{ from: location }} 
+        replace 
+      />
+    );
+  }
+  
+  // User is authenticated and has required role
   return <>{children}</>;
 };
 

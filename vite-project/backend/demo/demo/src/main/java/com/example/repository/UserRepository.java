@@ -40,7 +40,6 @@ public class UserRepository {
         return new ArrayList<>(users.values());
     }
 
-
     public boolean updateRole(String email, String newRole) {
         User user = users.get(email);
         if (user != null) {
@@ -50,6 +49,4 @@ public class UserRepository {
         }
         return false;
     }
-
-    
 }
