@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 public class User {
     private String email;
     private String password;
+    private String role = "RESEARCHER";
 
     public String getEmail(){
         return email;
@@ -18,6 +19,14 @@ public class User {
 
     public void setEmail(String email){
         this.email = email;
+    }
+
+    public String getRole(){
+        return role;
+    }
+
+    public void setRole(String role){
+        this.role = role;
     }
 
     public String getPassword(){
