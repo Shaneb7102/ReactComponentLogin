@@ -1,5 +1,5 @@
 import React from "react";
-import { HashRouter, Routes, Route } from "react-router-dom";
+import {Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -9,7 +9,7 @@ import AuthGuard from "./components/AuthGuard";
 
 const App: React.FC = () => {
   return (
-    <HashRouter>
+    
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
@@ -31,7 +31,6 @@ const App: React.FC = () => {
           } 
         />
       </Routes>
-    </HashRouter>
   );
 };
 
