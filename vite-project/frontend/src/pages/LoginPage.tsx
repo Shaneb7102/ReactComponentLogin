@@ -1,7 +1,7 @@
-import "./App.css";
+import "../App.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import React, { useState } from "react";
-import { loginUser, LoginCredentials } from "./services/api";
+import { loginUser, LoginCredentials } from "../services/api";
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();

@@ -1,6 +1,6 @@
-import "./App.css";
+import "../App.css";
 import { Link } from "react-router-dom";
-import { getCurrentUser, logoutUser } from "./services/api";
+import { getCurrentUser, logoutUser } from "../services/api";
 
 const EndPage: React.FC = () => {
   const user = getCurrentUser();

@@ -1,7 +1,7 @@
-import "./App.css";
+import "../App.css";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
-import { registerUser, RegisterCredentials } from "./services/api";
+import { registerUser, RegisterCredentials } from "../services/api";
 
 const RegisterPage: React.FC = () => {
   const navigate = useNavigate();

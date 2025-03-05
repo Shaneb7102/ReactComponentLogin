@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { fetchAllUsers, logoutUser, updateUserRole } from "./services/api";
+import { fetchAllUsers, logoutUser, updateUserRole } from "../services/api";
 
 const AdminPage: React.FC = () => {
   const [users, setUsers] = useState<any[]>([]);
