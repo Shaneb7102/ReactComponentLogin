@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://shaneb7102.github.io/ReactComponentLogin/",
+  "homepage": "https://Shaneb7102.github.io/ReactComponentLogin/",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
