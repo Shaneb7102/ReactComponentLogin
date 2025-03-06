@@ -7,7 +7,7 @@ const EndPage: React.FC = () => {
     
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
-      <h1 className="text-2xl font-bold mb-6">Hello, Thank you for logging in</h1>
+      <h1 className="text-2xl font-bold mb-6">Hello {user?.role}, Thank you for logging in</h1>
       
       {user?.role === "ADMIN" && (
         <Link 

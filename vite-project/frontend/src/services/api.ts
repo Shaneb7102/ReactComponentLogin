@@ -116,7 +116,7 @@ export const logoutUser = (): void => {
   localStorage.removeItem('role');
   
   // Redirect to the login page
-  window.location.href = '/login';
+  window.location.href = '#/login';
 };
 
 // Get current user from localStorage
