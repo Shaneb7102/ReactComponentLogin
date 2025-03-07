@@ -1,7 +1,8 @@
 import "../App.css";
 import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { registerUser, RegisterCredentials } from "../services/api";
+import { evaluatePasswordStrength } from "../utils/passwordUtils";
 
 const RegisterPage: React.FC = () => {
   const navigate = useNavigate();
@@ -11,6 +12,18 @@ const RegisterPage: React.FC = () => {
     password: "",
   });
   const [message, setMessage] = useState<string>("");
+  const [passwordStrength, setPasswordStrength] = useState({
+    score: 0,
+    feedback: ""
+  });
+
+  useEffect(() => {
+    if (credentials.password) {
+      setPasswordStrength(evaluatePasswordStrength(credentials.password));
+    } else {
+      setPasswordStrength({ score: 0, feedback: "" });
+    }
+  }, [credentials.password]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCredentials({
@@ -22,9 +35,15 @@ const RegisterPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Simple validation
+    // Enhanced validation
     if (!credentials.email || !credentials.password) {
       setMessage("Please fill in all required fields");
+      return;
+    }
+
+    // Password strength validation
+    if (passwordStrength.score < 3) {
+      setMessage("Please create a stronger password");
       return;
     }
 
@@ -39,6 +58,19 @@ const RegisterPage: React.FC = () => {
       navigate("/login");
     } else {
       setMessage("Registration failed. Email may already exist.");
+    }
+  };
+
+  // Get color based on password strength
+  const getStrengthColor = () => {
+    switch(passwordStrength.score) {
+      case 0: return "text-red-500";
+      case 1: return "text-orange-500";
+      case 2: return "text-yellow-500";
+      case 3: return "text-blue-500";
+      case 4:
+      case 5: return "text-green-500";
+      default: return "text-gray-500";
     }
   };
 
@@ -88,6 +120,31 @@ const RegisterPage: React.FC = () => {
               required
               className="w-full px-3 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+            
+            {/* Password strength meter */}
+            {credentials.password && (
+              <div className="mt-2">
+                <div className="flex space-x-1 mb-1">
+                  {[...Array(5)].map((_, index) => (
+                    <div 
+                      key={index}
+                      className={`h-1 flex-1 rounded-full ${
+                        index < passwordStrength.score 
+                          ? index === 0 ? "bg-red-500" 
+                            : index === 1 ? "bg-orange-500"
+                            : index === 2 ? "bg-yellow-500"
+                            : index === 3 ? "bg-blue-500"
+                            : "bg-green-500"
+                          : "bg-gray-200"
+                      }`}
+                    />
+                  ))}
+                </div>
+                <p className={`text-xs ${getStrengthColor()}`}>
+                  {passwordStrength.feedback}
+                </p>
+              </div>
+            )}
           </div>
           <button
             type="submit"
