@@ -5,18 +5,22 @@
   "type": "module",
   "homepage": "https://Shaneb7102.github.io/ReactComponentLogin/",
   "scripts": {
-    "lint": "eslint src --ext .ts,.tsx",
-  "lint:fix": "eslint src --ext .ts,.tsx --fix",
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    
+      "lint": "eslint .",
+      "lint:html": "if not exist reports mkdir reports && eslint . --format html --output-file reports/eslint.html",
+      "pretty-lint": "npm run lint:html && node eslint.style.cjs",
+      "lint:fix": "eslint src --ext .ts,.tsx --fix",
+      "dev": "vite",
+      "build": "tsc -b && vite build",
+      "preview": "vite preview",
+      "predeploy": "npm run build",
+      "deploy": "gh-pages -d dist"
+
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.9",
     "axios": "^1.8.1",
+    "cheerio": "^1.0.0",
     "nodemon": "^3.1.9",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
